@@ -5,7 +5,7 @@ let products = [
         price: 499,
         category: "fashion",
         rating: 4.5,
-        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
+        image: "https://picsum.photos/200?1"
     },
     {
         id: 2,
@@ -13,7 +13,7 @@ let products = [
         price: 1999,
         category: "fashion",
         rating: 4.2,
-        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+        image: "https://picsum.photos/200?2"
     },
     {
         id: 3,
@@ -21,7 +21,7 @@ let products = [
         price: 2999,
         category: "electronics",
         rating: 4.7,
-        image: "https://images.unsplash.com/photo-1518441902110-3d5d3b5d7a2d"
+        image: "https://picsum.photos/200?3"
     },
     {
         id: 4,
@@ -29,19 +29,51 @@ let products = [
         price: 1499,
         category: "electronics",
         rating: 4.3,
-        image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167"
+        image: "https://picsum.photos/200?4"
     },
     {
-      id: 5,
-      name: "Laptop",
-      price: 50000,
-      category: "electronics",
-      rating: 4.6,
-      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+        id: 5,
+        name: "Saree",
+        price: 1200,
+        category: "fashion",
+        rating: 4.6,
+        image: "https://picsum.photos/200?5"
+    },
+    {
+        id: 6,
+        name: "Kurti",
+        price: 800,
+        category: "fashion",
+        rating: 4.4,
+        image: "https://picsum.photos/200?6"
+    },
+    {
+        id: 7,
+        name: "Mobile Phone",
+        price: 15000,
+        category: "electronics",
+        rating: 4.5,
+        image: "https://picsum.photos/200?7"
+    },
+    {
+        id: 8,
+        name: "Kids Clothing",
+        price: 600,
+        category: "fashion",
+        rating: 4.3,
+        image: "https://picsum.photos/200?8"
+    },
+    {
+        id: 9,
+        name: "Laptop",
+        price: 55000,
+        category: "electronics",
+        rating: 4.8,
+        image: "https://picsum.photos/200?9"
     }
 ];
 
-// DISPLAY
+// DISPLAY PRODUCTS
 function displayProducts(list) {
     let container = document.getElementById("products");
     if (!container) return;
@@ -77,33 +109,23 @@ function filterCategory(cat) {
     else displayProducts(products.filter(p => p.category === cat));
 }
 
-// ADD TO CART
+// CART
 function addToCart(id) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
     let item = cart.find(p => p.id === id);
 
-    if (item) {
-        item.qty += 1;
-    } else {
-        cart.push({ id: id, qty: 1 });
-    }
+    if (item) item.qty++;
+    else cart.push({id, qty: 1});
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart!");
+    alert("Added!");
 }
 
 // DISPLAY CART
 if (document.getElementById("cart")) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartDiv = document.getElementById("cart");
     let total = 0;
-
-    cartDiv.innerHTML = "";
-
-    if (cart.length === 0) {
-        cartDiv.innerHTML = "<h3>Your cart is empty 😢</h3>";
-    }
+    let cartDiv = document.getElementById("cart");
 
     cart.forEach((item, index) => {
         let p = products.find(x => x.id === item.id);
@@ -114,7 +136,7 @@ if (document.getElementById("cart")) {
         <div class="card">
             <h3>${p.name}</h3>
             <p>₹${p.price}</p>
-            <p>Quantity: ${item.qty}</p>
+            <p>Qty: ${item.qty}</p>
 
             <button onclick="increaseQty(${index})">➕</button>
             <button onclick="decreaseQty(${index})">➖</button>
@@ -127,7 +149,7 @@ if (document.getElementById("cart")) {
     document.getElementById("total").innerText = "Grand Total: ₹" + total;
 }
 
-// INCREASE
+// QUANTITY
 function increaseQty(index) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart[index].qty++;
@@ -135,21 +157,16 @@ function increaseQty(index) {
     location.reload();
 }
 
-// DECREASE
 function decreaseQty(index) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    if (cart[index].qty > 1) {
-        cart[index].qty--;
-    } else {
-        cart.splice(index, 1);
-    }
+    if (cart[index].qty > 1) cart[index].qty--;
+    else cart.splice(index, 1);
 
     localStorage.setItem("cart", JSON.stringify(cart));
     location.reload();
 }
 
-// REMOVE
 function removeItem(index) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.splice(index, 1);
@@ -157,9 +174,8 @@ function removeItem(index) {
     location.reload();
 }
 
-// CHECKOUT
 function checkout() {
     localStorage.removeItem("cart");
-    alert("Order placed successfully!");
+    alert("Order placed!");
     window.location.href = "index.html";
 }
