@@ -30,6 +30,14 @@ let products = [
         category: "electronics",
         rating: 4.3,
         image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167"
+    },
+    {
+      id: 5,
+      name: "Laptop",
+      price: 50000,
+      category: "electronics",
+      rating: 4.6,
+      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
     }
 ];
 
@@ -69,40 +77,79 @@ function filterCategory(cat) {
     else displayProducts(products.filter(p => p.category === cat));
 }
 
-// CART
+// ADD TO CART
 function addToCart(id) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     let item = cart.find(p => p.id === id);
 
-    if (item) item.qty++;
-    else cart.push({id, qty: 1});
+    if (item) {
+        item.qty += 1;
+    } else {
+        cart.push({ id: id, qty: 1 });
+    }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added!");
+    alert("Added to cart!");
 }
 
-// CART DISPLAY
+// DISPLAY CART
 if (document.getElementById("cart")) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let total = 0;
     let cartDiv = document.getElementById("cart");
+    let total = 0;
+
+    cartDiv.innerHTML = "";
+
+    if (cart.length === 0) {
+        cartDiv.innerHTML = "<h3>Your cart is empty 😢</h3>";
+    }
 
     cart.forEach((item, index) => {
         let p = products.find(x => x.id === item.id);
-        total += p.price * item.qty;
+        let itemTotal = p.price * item.qty;
+        total += itemTotal;
 
         cartDiv.innerHTML += `
         <div class="card">
             <h3>${p.name}</h3>
             <p>₹${p.price}</p>
-            <p>Qty: ${item.qty}</p>
+            <p>Quantity: ${item.qty}</p>
+
+            <button onclick="increaseQty(${index})">➕</button>
+            <button onclick="decreaseQty(${index})">➖</button>
             <button onclick="removeItem(${index})">Remove</button>
+
+            <p><b>Total: ₹${itemTotal}</b></p>
         </div>`;
     });
 
-    document.getElementById("total").innerText = "Total: ₹" + total;
+    document.getElementById("total").innerText = "Grand Total: ₹" + total;
 }
 
+// INCREASE
+function increaseQty(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart[index].qty++;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    location.reload();
+}
+
+// DECREASE
+function decreaseQty(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart[index].qty > 1) {
+        cart[index].qty--;
+    } else {
+        cart.splice(index, 1);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    location.reload();
+}
+
+// REMOVE
 function removeItem(index) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.splice(index, 1);
@@ -110,28 +157,9 @@ function removeItem(index) {
     location.reload();
 }
 
+// CHECKOUT
 function checkout() {
     localStorage.removeItem("cart");
-    alert("Order placed!");
+    alert("Order placed successfully!");
     window.location.href = "index.html";
-}
-
-// LOGIN SYSTEM
-function register() {
-    let u = document.getElementById("username").value;
-    let p = document.getElementById("password").value;
-    localStorage.setItem(u, p);
-    alert("Registered!");
-}
-
-function login() {
-    let u = document.getElementById("username").value;
-    let p = document.getElementById("password").value;
-
-    if (localStorage.getItem(u) === p) {
-        alert("Login success!");
-        window.location.href = "index.html";
-    } else {
-        alert("Invalid credentials");
-    }
 }
