@@ -18,6 +18,7 @@ body {
     font-size: 22px;
 }
 
+/* SEARCH */
 .navbar input {
     width: 40%;
     padding: 10px;
@@ -25,19 +26,21 @@ body {
     border: none;
 }
 
+/* LINKS */
 .cart-btn {
     color: white;
     text-decoration: none;
     margin-left: 10px;
 }
 
-/* CATEGORY */
+/* CATEGORY BAR */
 .categories {
     background: #4f46e5;
     text-align: center;
     padding: 10px;
 }
 
+/* 🔥 FIX TEXT VISIBILITY */
 .categories button {
     margin: 5px;
     padding: 8px 15px;
@@ -45,7 +48,7 @@ body {
     background: white;
     border-radius: 20px;
     cursor: pointer;
-    color: black;   /* 🔥 FIX TEXT */
+    color: #000;   /* 🔥 IMPORTANT FIX */
     font-weight: bold;
 }
 
@@ -57,7 +60,7 @@ body {
     background: linear-gradient(90deg, #2563eb, #7c3aed);
 }
 
-/* PRODUCTS */
+/* PRODUCTS GRID */
 #products {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -88,17 +91,4 @@ button {
     color: white;
     border-radius: 5px;
     cursor: pointer;
-}
-
-/* LOGIN */
-.login-box {
-    width: 300px;
-    margin: 100px auto;
-    text-align: center;
-}
-
-.login-box input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
 }
