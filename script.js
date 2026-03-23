@@ -5,7 +5,7 @@ let products = [
         price: 499,
         category: "fashion",
         rating: 4.5,
-        image: "https://picsum.photos/200?1"
+        image: "https://i.imgur.com/1X5QH6F.jpg"
     },
     {
         id: 2,
@@ -13,7 +13,7 @@ let products = [
         price: 1999,
         category: "fashion",
         rating: 4.2,
-        image: "https://picsum.photos/200?2"
+        image: "https://i.imgur.com/0Z8FQ6T.jpg"
     },
     {
         id: 3,
@@ -21,7 +21,7 @@ let products = [
         price: 2999,
         category: "electronics",
         rating: 4.7,
-        image: "https://picsum.photos/200?3"
+        image: "https://i.imgur.com/7Qj6QkR.jpg"
     },
     {
         id: 4,
@@ -29,7 +29,7 @@ let products = [
         price: 1499,
         category: "electronics",
         rating: 4.3,
-        image: "https://picsum.photos/200?4"
+        image: "https://i.imgur.com/5ZQZ1Zm.jpg"
     },
     {
         id: 5,
@@ -37,7 +37,7 @@ let products = [
         price: 1200,
         category: "fashion",
         rating: 4.6,
-        image: "https://picsum.photos/200?5"
+        image: "https://i.imgur.com/9pK8G1F.jpg"
     },
     {
         id: 6,
@@ -45,7 +45,7 @@ let products = [
         price: 800,
         category: "fashion",
         rating: 4.4,
-        image: "https://picsum.photos/200?6"
+        image: "https://i.imgur.com/Y3ZQZkF.jpg"
     },
     {
         id: 7,
@@ -53,7 +53,7 @@ let products = [
         price: 15000,
         category: "electronics",
         rating: 4.5,
-        image: "https://picsum.photos/200?7"
+        image: "https://i.imgur.com/zY3ZQZk.jpg"
     },
     {
         id: 8,
@@ -61,7 +61,7 @@ let products = [
         price: 600,
         category: "fashion",
         rating: 4.3,
-        image: "https://picsum.photos/200?8"
+        image: "https://i.imgur.com/6ZQZ1Zm.jpg"
     },
     {
         id: 9,
@@ -69,7 +69,7 @@ let products = [
         price: 55000,
         category: "electronics",
         rating: 4.8,
-        image: "https://picsum.photos/200?9"
+        image: "https://i.imgur.com/JQZQZkF.jpg"
     }
 ];
 
@@ -121,7 +121,7 @@ function addToCart(id) {
     alert("Added!");
 }
 
-// DISPLAY CART
+// CART DISPLAY
 if (document.getElementById("cart")) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let total = 0;
