@@ -1,16 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial;
     background: #f1f3f6;
 }
 
 /* NAVBAR */
 .navbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     background: linear-gradient(90deg, #2563eb, #7c3aed);
     padding: 15px;
     color: white;
@@ -18,12 +16,11 @@ body {
 
 .logo {
     font-size: 22px;
-    font-weight: bold;
 }
 
 /* SEARCH */
 .navbar input {
-    width: 50%;
+    width: 40%;
     padding: 10px;
     border-radius: 20px;
     border: none;
@@ -33,14 +30,13 @@ body {
 .cart-btn {
     color: white;
     text-decoration: none;
-    font-size: 18px;
 }
 
 /* CATEGORY */
 .categories {
     background: #4f46e5;
-    padding: 10px;
     text-align: center;
+    padding: 10px;
 }
 
 .categories button {
@@ -52,7 +48,13 @@ body {
     cursor: pointer;
 }
 
-/* GRID */
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 20px;
+}
+
+/* 🔥 GRID FIX */
 #products {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -65,12 +67,7 @@ body {
     background: white;
     border-radius: 10px;
     padding: 10px;
-    transition: 0.3s;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.card:hover {
-    transform: scale(1.05);
 }
 
 /* IMAGE */
@@ -89,8 +86,4 @@ button {
     color: white;
     border-radius: 5px;
     cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.9;
 }
