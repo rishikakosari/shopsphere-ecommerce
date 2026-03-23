@@ -1,12 +1,41 @@
 let products = [
-    {id: 1, name: "Men's T-Shirt", price: 499, category: "fashion", rating: 4.5, image: "https://via.placeholder.com/200"},
-    {id: 2, name: "Running Shoes", price: 1999, category: "fashion", rating: 4.2, image: "https://via.placeholder.com/200"},
-    {id: 3, name: "Smart Watch", price: 2999, category: "electronics", rating: 4.7, image: "https://via.placeholder.com/200"},
-    {id: 4, name: "Headphones", price: 1499, category: "electronics", rating: 4.3, image: "https://via.placeholder.com/200"}
+    {
+        id: 1,
+        name: "Men T-Shirt",
+        price: 499,
+        category: "fashion",
+        rating: 4.5,
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
+    },
+    {
+        id: 2,
+        name: "Running Shoes",
+        price: 1999,
+        category: "fashion",
+        rating: 4.2,
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+    },
+    {
+        id: 3,
+        name: "Smart Watch",
+        price: 2999,
+        category: "electronics",
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1518441902110-3d5d3b5d7a2d"
+    },
+    {
+        id: 4,
+        name: "Headphones",
+        price: 1499,
+        category: "electronics",
+        rating: 4.3,
+        image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167"
+    }
 ];
 
+// DISPLAY
 function displayProducts(list) {
-    const container = document.getElementById("products");
+    let container = document.getElementById("products");
     if (!container) return;
 
     container.innerHTML = "";
@@ -17,7 +46,7 @@ function displayProducts(list) {
             <img src="${p.image}">
             <h3>${p.name}</h3>
             <p>⭐ ${p.rating}</p>
-            <p><b>₹${p.price}</b></p>
+            <p>₹${p.price}</p>
             <button onclick="addToCart(${p.id})">Add to Cart</button>
         </div>`;
     });
@@ -27,46 +56,45 @@ if (document.getElementById("products")) {
     displayProducts(products);
 }
 
+// SEARCH
 function searchProduct() {
     let value = document.getElementById("search").value.toLowerCase();
     let filtered = products.filter(p => p.name.toLowerCase().includes(value));
     displayProducts(filtered);
 }
 
+// FILTER
 function filterCategory(cat) {
-    if (cat === "all") {
-        displayProducts(products);
-    } else {
-        let filtered = products.filter(p => p.category === cat);
-        displayProducts(filtered);
-    }
+    if (cat === "all") displayProducts(products);
+    else displayProducts(products.filter(p => p.category === cat));
 }
 
+// CART
 function addToCart(id) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let item = cart.find(p => p.id === id);
 
     if (item) item.qty++;
-    else cart.push({id: id, qty: 1});
+    else cart.push({id, qty: 1});
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart!");
+    alert("Added!");
 }
 
+// CART DISPLAY
 if (document.getElementById("cart")) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartDiv = document.getElementById("cart");
     let total = 0;
+    let cartDiv = document.getElementById("cart");
 
     cart.forEach((item, index) => {
-        let product = products.find(p => p.id === item.id);
-        let itemTotal = product.price * item.qty;
-        total += itemTotal;
+        let p = products.find(x => x.id === item.id);
+        total += p.price * item.qty;
 
         cartDiv.innerHTML += `
         <div class="card">
-            <h3>${product.name}</h3>
-            <p>₹${product.price}</p>
+            <h3>${p.name}</h3>
+            <p>₹${p.price}</p>
             <p>Qty: ${item.qty}</p>
             <button onclick="removeItem(${index})">Remove</button>
         </div>`;
@@ -86,4 +114,24 @@ function checkout() {
     localStorage.removeItem("cart");
     alert("Order placed!");
     window.location.href = "index.html";
+}
+
+// LOGIN SYSTEM
+function register() {
+    let u = document.getElementById("username").value;
+    let p = document.getElementById("password").value;
+    localStorage.setItem(u, p);
+    alert("Registered!");
+}
+
+function login() {
+    let u = document.getElementById("username").value;
+    let p = document.getElementById("password").value;
+
+    if (localStorage.getItem(u) === p) {
+        alert("Login success!");
+        window.location.href = "index.html";
+    } else {
+        alert("Invalid credentials");
+    }
 }
