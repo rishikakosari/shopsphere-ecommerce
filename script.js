@@ -1,76 +1,13 @@
 let products = [
-    {
-        id: 1,
-        name: "Men T-Shirt",
-        price: 499,
-        category: "fashion",
-        rating: 4.5,
-        image: "https://i.imgur.com/1X5QH6F.jpg"
-    },
-    {
-        id: 2,
-        name: "Running Shoes",
-        price: 1999,
-        category: "fashion",
-        rating: 4.2,
-        image: "https://i.imgur.com/0Z8FQ6T.jpg"
-    },
-    {
-        id: 3,
-        name: "Smart Watch",
-        price: 2999,
-        category: "electronics",
-        rating: 4.7,
-        image: "https://i.imgur.com/7Qj6QkR.jpg"
-    },
-    {
-        id: 4,
-        name: "Headphones",
-        price: 1499,
-        category: "electronics",
-        rating: 4.3,
-        image: "https://i.imgur.com/5ZQZ1Zm.jpg"
-    },
-    {
-        id: 5,
-        name: "Saree",
-        price: 1200,
-        category: "fashion",
-        rating: 4.6,
-        image: "https://i.imgur.com/9pK8G1F.jpg"
-    },
-    {
-        id: 6,
-        name: "Kurti",
-        price: 800,
-        category: "fashion",
-        rating: 4.4,
-        image: "https://i.imgur.com/Y3ZQZkF.jpg"
-    },
-    {
-        id: 7,
-        name: "Mobile Phone",
-        price: 15000,
-        category: "electronics",
-        rating: 4.5,
-        image: "https://i.imgur.com/zY3ZQZk.jpg"
-    },
-    {
-        id: 8,
-        name: "Kids Clothing",
-        price: 600,
-        category: "fashion",
-        rating: 4.3,
-        image: "https://i.imgur.com/6ZQZ1Zm.jpg"
-    },
-    {
-        id: 9,
-        name: "Laptop",
-        price: 55000,
-        category: "electronics",
-        rating: 4.8,
-        image: "https://i.imgur.com/JQZQZkF.jpg"
-    }
+    { id:1, name:"Men T-Shirt", price:499, category:"fashion", rating:4.5, image:"images/tshirt.jpg" },
+    { id:2, name:"Running Shoes", price:1999, category:"fashion", rating:4.2, image:"images/shoes.jpg" },
+    { id:3, name:"Smart Watch", price:2999, category:"electronics", rating:4.7, image:"images/watch.jpg" },
+    { id:4, name:"Headphones", price:1499, category:"electronics", rating:4.3, image:"images/headphones.jpg" },
+    { id:5, name:"Saree", price:1200, category:"fashion", rating:4.6, image:"images/saree.jpg" },
+    { id:6, name:"Kurti", price:800, category:"fashion", rating:4.4, image:"images/kurti.jpg" },
+    { id:7, name:"Mobile Phone", price:15000, category:"electronics", rating:4.5, image:"images/mobile.jpg" },
+    { id:8, name:"Kids Clothing", price:600, category:"fashion", rating:4.3, image:"images/kids.jpg" },
+    { id:9, name:"Laptop", price:55000, category:"electronics", rating:4.8, image:"images/laptop.jpg" }
 ];
 
 // DISPLAY PRODUCTS
@@ -115,7 +52,7 @@ function addToCart(id) {
     let item = cart.find(p => p.id === id);
 
     if (item) item.qty++;
-    else cart.push({id, qty: 1});
+    else cart.push({id, qty:1});
 
     localStorage.setItem("cart", JSON.stringify(cart));
     alert("Added!");
@@ -137,11 +74,9 @@ if (document.getElementById("cart")) {
             <h3>${p.name}</h3>
             <p>₹${p.price}</p>
             <p>Qty: ${item.qty}</p>
-
             <button onclick="increaseQty(${index})">➕</button>
             <button onclick="decreaseQty(${index})">➖</button>
             <button onclick="removeItem(${index})">Remove</button>
-
             <p><b>Total: ₹${itemTotal}</b></p>
         </div>`;
     });
@@ -161,7 +96,7 @@ function decreaseQty(index) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     if (cart[index].qty > 1) cart[index].qty--;
-    else cart.splice(index, 1);
+    else cart.splice(index,1);
 
     localStorage.setItem("cart", JSON.stringify(cart));
     location.reload();
@@ -169,7 +104,7 @@ function decreaseQty(index) {
 
 function removeItem(index) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.splice(index, 1);
+    cart.splice(index,1);
     localStorage.setItem("cart", JSON.stringify(cart));
     location.reload();
 }
